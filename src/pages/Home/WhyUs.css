@@ -1,0 +1,786 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap');
+
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .why-us-bg {
+    display: none;
+  }
+}
+
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
+:root {
+  /* Colors */
+  --primary-blue: #1a5fdc;
+  --primary-dark: #0d47a1;
+  --accent-gold: #fbbf24;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+  --bg-soft: #f8fafc;
+  --white: #ffffff;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(26, 95, 220, 0.12);
+  --shadow-lg: 0 20px 40px rgba(26, 95, 220, 0.15);
+  --shadow-xl: 0 30px 60px rgba(26, 95, 220, 0.2);
+  
+  /* Spacing */
+  /* --section-padding-y: 100px; */
+  --section-padding-x: 20px;
+  --card-padding: 40px 30px;
+  --grid-gap: 30px;
+}
+
+/* ============================================
+   WHY US SECTION - BASE STYLES
+   ============================================ */
+.why-us {
+  position: relative;
+  /* padding: var(--section-padding-y) var(--section-padding-x); */
+  padding-bottom: 40px;
+  padding-top: 40px;
+  background: linear-gradient(180deg, var(--bg-soft) 0%, var(--white) 100%);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   BACKGROUND DECORATIONS
+   ============================================ */
+.why-us-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.why-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26, 95, 220, 0.08) 0%, transparent 70%);
+  filter: blur(60px);
+  animation: floatSlow 25s ease-in-out infinite;
+}
+
+.why-bg-circle-1 {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -150px;
+  animation-delay: 0s;
+}
+
+.why-bg-circle-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.06) 0%, transparent 70%);
+  animation-delay: 5s;
+}
+
+.why-bg-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(26, 95, 220, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 95, 220, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.5;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -20px) scale(1.05);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+.why-us-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   SECTION HEADER
+   ============================================ */
+.why-us-header {
+  text-align: center;
+  margin-bottom: 70px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.why-us-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, rgba(26, 95, 220, 0.1), rgba(59, 130, 246, 0.1));
+  border: 1px solid rgba(26, 95, 220, 0.2);
+  border-radius: 50px;
+  color: var(--primary-blue);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+.why-us-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.title-accent {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+}
+
+.why-us-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--text-light);
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+/* ============================================
+   FEATURES GRID
+   ============================================ */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--grid-gap);
+}
+
+/* ============================================
+   FEATURE CARDS
+   ============================================ */
+.why-card {
+  position: relative;
+  background: var(--white);
+  padding: var(--card-padding);
+  border-radius: 20px;
+  border: 1px solid rgba(26, 95, 220, 0.1);
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.why-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.why-card:nth-child(1) { transition-delay: 0.1s; }
+.why-card:nth-child(2) { transition-delay: 0.2s; }
+.why-card:nth-child(3) { transition-delay: 0.3s; }
+.why-card:nth-child(4) { transition-delay: 0.4s; }
+
+/* Card Glow Effect */
+.card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 50% 0%,
+    var(--card-color, #1a5fdc) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.why-card:hover .card-glow {
+  opacity: 0.08;
+}
+
+.why-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(26, 95, 220, 0.3);
+}
+
+/* ============================================
+   ICON CONTAINER
+   ============================================ */
+.why-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26, 95, 220, 0.1), rgba(59, 130, 246, 0.1));
+  border-radius: 16px;
+  transition: all 0.4s ease;
+}
+
+.why-card:hover .icon-bg {
+  background: linear-gradient(135deg, var(--primary-blue), #3b82f6);
+  transform: rotate(5deg) scale(1.05);
+}
+
+.why-icon svg {
+  position: relative;
+  z-index: 1;
+  color: var(--primary-blue);
+  transition: all 0.4s ease;
+  width: 40px;
+  height: 40px;
+}
+
+.why-card:hover .why-icon svg {
+  color: var(--white);
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* ============================================
+   CARD CONTENT
+   ============================================ */
+.why-card-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.why-card:hover .why-card-title {
+  color: var(--primary-blue);
+}
+
+.why-card-description {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  color: var(--text-light);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ============================================
+   CARD NUMBER DECORATION
+   ============================================ */
+.card-number {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  color: rgba(26, 95, 220, 0.03);
+  line-height: 1;
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.why-card:hover .card-number {
+  color: rgba(26, 95, 220, 0.08);
+  transform: scale(1.1);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - BREAKPOINTS
+   ============================================ */
+
+/* Ultra-wide Screens (2000px+) */
+@media (min-width: 2000px) {
+  :root {
+    --section-padding-y: 140px;
+    --section-padding-x: 40px;
+    --card-padding: 60px 50px;
+    --grid-gap: 45px;
+  }
+
+  .why-us-container {
+    max-width: 1600px;
+  }
+
+  .why-us-header {
+    margin-bottom: 90px;
+  }
+
+  .why-us-title {
+    font-size: 3.5rem;
+  }
+
+  .why-us-subtitle {
+    font-size: 1.25rem;
+    max-width: 800px;
+  }
+
+  .why-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+  }
+
+  .why-icon svg {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Large Desktop (1600px - 1999px) */
+@media (min-width: 1600px) and (max-width: 1999px) {
+  :root {
+    --section-padding-y: 120px;
+    --card-padding: 50px 40px;
+    --grid-gap: 40px;
+  }
+
+  .why-us-container {
+    max-width: 1500px;
+  }
+
+  .why-us-title {
+    font-size: 3.25rem;
+  }
+
+  .why-us-subtitle {
+    max-width: 750px;
+  }
+
+  .why-icon {
+    width: 90px;
+    height: 90px;
+  }
+
+  .why-icon svg {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* Standard Desktop (1400px - 1599px) */
+@media (max-width: 1599px) and (min-width: 1400px) {
+  .why-us-container {
+    max-width: 1300px;
+  }
+}
+
+/* Desktop (1200px - 1399px) */
+@media (max-width: 1399px) and (min-width: 1200px) {
+  :root {
+    --section-padding-y: 90px;
+    --section-padding-x: 30px;
+    --grid-gap: 28px;
+  }
+
+  .why-us-title {
+    font-size: 2.8rem;
+  }
+}
+
+/* Small Desktop & Large Tablet (992px - 1199px) */
+@media (max-width: 1199px) {
+  :root {
+    --section-padding-y: 80px;
+    --section-padding-x: 25px;
+    --card-padding: 35px 25px;
+    --grid-gap: 25px;
+  }
+
+  .why-us-header {
+    margin-bottom: 60px;
+  }
+
+  .why-us-title {
+    font-size: 2.5rem;
+  }
+
+  .why-us-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .why-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .why-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .why-card-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* Tablet (768px - 991px) */
+@media (max-width: 991px) {
+  :root {
+    --section-padding-y: 70px;
+    --section-padding-x: 20px;
+    --grid-gap: 22px;
+  }
+
+  .why-us-header {
+    margin-bottom: 50px;
+  }
+
+  .why-us-title {
+    font-size: 2.25rem;
+  }
+
+  .why-us-subtitle {
+    font-size: 1rem;
+    max-width: 600px;
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why-bg-circle-1 {
+    width: 400px;
+    height: 400px;
+  }
+
+  .why-bg-circle-2 {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+/* Mobile & Small Tablet (577px - 767px) */
+@media (max-width: 767px) {
+  :root {
+    --section-padding-y: 60px;
+    --card-padding: 30px 25px;
+    --grid-gap: 20px;
+  }
+
+  .why-us-header {
+    margin-bottom: 40px;
+  }
+
+  .why-us-badge {
+    font-size: 0.85rem;
+    padding: 7px 18px;
+  }
+
+  .why-us-title {
+    font-size: 2rem;
+    margin-bottom: 18px;
+  }
+
+  .why-us-subtitle {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-icon {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 20px;
+  }
+
+  .why-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .why-card-title {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+  }
+
+  .why-card-description {
+    font-size: 0.9rem;
+  }
+
+  .card-number {
+    font-size: 4rem;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* Large Mobile (480px - 576px) */
+@media (max-width: 576px) {
+  :root {
+    --section-padding-y: 50px;
+    --section-padding-x: 15px;
+    --card-padding: 28px 22px;
+    --grid-gap: 18px;
+  }
+
+  .why-us-header {
+    margin-bottom: 35px;
+  }
+
+  .why-us-badge {
+    font-size: 0.8rem;
+    padding: 6px 16px;
+  }
+
+  .why-us-title {
+    font-size: 1.85rem;
+  }
+
+  .why-us-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .why-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .why-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .why-card-title {
+    font-size: 1.2rem;
+  }
+
+  .why-card-description {
+    font-size: 0.875rem;
+  }
+
+  .card-number {
+    font-size: 3.5rem;
+  }
+}
+
+/* Standard Mobile (360px - 479px) */
+@media (max-width: 479px) {
+  :root {
+    --section-padding-y: 45px;
+    --card-padding: 25px 20px;
+    --grid-gap: 16px;
+  }
+
+  .why-us-title {
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+
+  .why-us-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .why-card {
+    border-radius: 16px;
+  }
+
+  .why-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .why-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .why-card-title {
+    font-size: 1.15rem;
+  }
+
+  .why-card-description {
+    font-size: 0.85rem;
+    line-height: 1.65;
+  }
+
+  .card-number {
+    font-size: 3rem;
+    bottom: 12px;
+    right: 12px;
+  }
+}
+
+/* Small Mobile (up to 359px) */
+@media (max-width: 359px) {
+  :root {
+    --section-padding-y: 40px;
+    --section-padding-x: 12px;
+    --card-padding: 22px 18px;
+  }
+
+  .why-us-badge {
+    font-size: 0.75rem;
+    padding: 5px 14px;
+  }
+
+  .why-us-title {
+    font-size: 1.6rem;
+  }
+
+  .why-us-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .why-icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .why-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .why-card-title {
+    font-size: 1.1rem;
+  }
+
+  .why-card-description {
+    font-size: 0.8rem;
+  }
+
+  .card-number {
+    font-size: 2.5rem;
+  }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+  :root {
+    --section-padding-y: 40px;
+  }
+
+  .why-us-header {
+    margin-bottom: 30px;
+  }
+
+  .why-us-title {
+    font-size: 1.75rem;
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .why-us-bg {
+    display: none;
+  }
+
+  .why-us {
+    padding: 40px 20px;
+    background: white;
+  }
+
+  .why-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .card-glow {
+    display: none;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST MODE
+   ============================================ */
+@media (prefers-contrast: high) {
+  .why-card {
+    border-width: 2px;
+  }
+
+  .why-us-badge {
+    border-width: 2px;
+  }
+}
+
+/* ============================================
+   DARK MODE SUPPORT (if needed in future)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  /* Add dark mode styles if needed */
+}

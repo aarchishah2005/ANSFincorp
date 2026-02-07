@@ -1,0 +1,240 @@
+/* ============================================
+   LOGO SCROLLER SECTION
+   ============================================ */
+.logo-scroller-section {
+  position: relative;
+  padding: 60px 20px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+  overflow: hidden;
+}
+
+/* Decorative line */
+.logo-scroller-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(26, 95, 220, 0.4),
+    transparent
+  );
+}
+
+/* Soft radial glow */
+.logo-scroller-section::after {
+  content: '';
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(26, 95, 220, 0.04), transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   SECTION HEADER
+   ============================================ */
+.scroller-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 35px;
+  position: relative;
+  z-index: 1;
+}
+
+.scroller-badge {
+  display: inline-block;
+  background: rgba(26, 95, 220, 0.1);
+  color: #1a5fdc;
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.scroller-title {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.title-accent {
+  background: linear-gradient(135deg, #1a5fdc, #2463eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.scroller-description {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* ============================================
+   LOGO CONTAINER
+   ============================================ */
+.logo-container {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 25px 0;
+  z-index: 1;
+}
+
+/* Fade edges */
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gradient-left {
+  left: 0;
+  background: linear-gradient(to right, #f8fafc, transparent);
+}
+
+.gradient-right {
+  right: 0;
+  background: linear-gradient(to left, #f8fafc, transparent);
+}
+
+/* ============================================
+   LOGO TRACK (INFINITE SCROLL)
+   ============================================ */
+.logo-track {
+  display: flex;
+  width: max-content;
+  gap: 40px;
+  animation: scroll 28s linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-track:hover {
+  animation-play-state: paused;
+}
+
+/* ============================================
+   LOGO CARDS
+   ============================================ */
+.logo-card {
+  flex-shrink: 0;
+  width: 300px;
+  height: 120px;
+}
+
+.logo-card-inner {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px rgba(26, 95, 220, 0.08);
+  transition: all 0.35s ease;
+}
+
+.logo-card:hover .logo-card-inner {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 18px 45px rgba(26, 95, 220, 0.15);
+}
+
+/* ============================================
+   LOGO IMAGE
+   ============================================ */
+.logo {
+  max-width: 210px;
+  max-height: 80px;
+  object-fit: contain;
+  filter: grayscale(30%) opacity(0.85);
+  transition: all 0.35s ease;
+}
+
+.logo-card:hover .logo {
+  filter: grayscale(0%) brightness(1.1);
+  transform: scale(1.08);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .logo-container {
+    width: 90%;
+  }
+
+  .logo-card {
+    width: 180px;
+    height: 110px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-scroller-section {
+    padding: 45px 15px;
+  }
+
+  .scroller-header {
+    margin-bottom: 25px;
+  }
+
+  .logo-container {
+    width: 95%;
+    padding: 20px 0;
+  }
+
+  .logo-track {
+    gap: 25px;
+    animation-duration: 24s;
+  }
+
+  .logo-card {
+    width: 160px;
+    height: 100px;
+  }
+
+  .logo {
+    max-width: 110px;
+    max-height: 55px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .logo-track {
+    animation: none;
+  }
+
+  .logo-card-inner,
+  .logo {
+    transition: none;
+  }
+}

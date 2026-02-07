@@ -1,0 +1,859 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .background-elements,
+  .card-glow {
+    display: none;
+  }
+}
+
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
+:root {
+  /* Colors */
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
+  --color-secondary: #8b5cf6;
+  --color-secondary-dark: #7c3aed;
+  --color-success: #10b981;
+  --color-success-dark: #059669;
+  --color-text-dark: #1a202c;
+  --color-text-medium: #64748b;
+  --color-text-light: #94a3b8;
+  --color-bg-light: #f8f9fa;
+  --color-bg-medium: #e9ecef;
+  --color-white: #ffffff;
+  --color-border: #e2e8f0;
+
+  /* Spacing */
+  --section-padding-y: 10px;
+  --section-padding-x: 0px;
+  --card-padding: 40px;
+  --grid-gap: 32px;
+  --header-mb: 80px;
+
+  /* Borders */
+  --border-radius-sm: 12px;
+  --border-radius-md: 20px;
+  --border-radius-lg: 24px;
+
+  /* Transitions */
+  --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.3s ease;
+}
+
+/* ============================================
+   SERVICES OVERVIEW SECTION - BASE STYLES
+   ============================================ */
+.services-overview {
+  position: relative;
+  /* padding: var(--section-padding-y) var(--section-padding-x); */
+  padding-bottom: 10px;
+  padding-top: 20px;
+  background: linear-gradient(180deg, var(--color-bg-light) 0%, var(--color-bg-medium) 100%);
+  overflow: hidden;
+}
+
+/* ============================================
+   BACKGROUND ELEMENTS
+   ============================================ */
+.background-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  animation: float 20s ease-in-out infinite;
+}
+
+.gradient-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+  top: -200px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.gradient-orb-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+  bottom: -150px;
+  right: -100px;
+  animation-delay: -10s;
+}
+
+.floating-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0.08;
+  animation: rotate 30s linear infinite;
+}
+
+.shape-1 {
+  width: 200px;
+  height: 200px;
+  border: 2px solid var(--color-primary);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  top: 15%;
+  right: 10%;
+  animation-duration: 25s;
+}
+
+.shape-2 {
+  width: 150px;
+  height: 150px;
+  border: 2px solid var(--color-secondary);
+  border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  bottom: 20%;
+  left: 15%;
+  animation-duration: 35s;
+  animation-direction: reverse;
+}
+
+.shape-3 {
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--color-primary);
+  border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+  top: 50%;
+  left: 50%;
+  animation-duration: 40s;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+.services-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+/* ============================================
+   SECTION HEADER
+   ============================================ */
+.services-header {
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.header-tag {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--border-radius-md);
+  color: var(--color-primary-dark);
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.services-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+  font-family: "Instrument Serif", "Georgia", serif;
+}
+
+.title-highlight {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.services-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.125rem);
+  color: var(--color-text-medium);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ============================================
+   SERVICES GRID
+   ============================================ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: var(--grid-gap);
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+/* ============================================
+   SERVICE CARD
+   ============================================ */
+.service-card {
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--card-padding);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg,
+      rgba(59, 130, 246, 0.05) 0%,
+      rgba(139, 92, 246, 0.05) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.card-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle,
+      rgba(59, 130, 246, 0.2) 0%,
+      transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.card-hovered .card-glow {
+  opacity: 1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   ICON WRAPPER
+   ============================================ */
+.icon-wrapper {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 28px;
+}
+
+.service-icon {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: var(--color-primary);
+  z-index: 2;
+  transition: transform var(--transition-base);
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.icon-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  border-radius: var(--border-radius-md);
+  opacity: 0.15;
+  transition: all var(--transition-base);
+}
+
+/* Specific colors for each service */
+.icon-bg-loans {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.icon-bg-subsidy {
+  background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-dark) 100%);
+}
+
+.icon-bg-insurance {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+}
+
+.service-card:hover .icon-bg {
+  transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
+  opacity: 0.25;
+}
+
+/* ============================================
+   SERVICE CONTENT
+   ============================================ */
+.service-title {
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0 0 16px 0;
+  font-family: "Instrument Serif", "Georgia", serif;
+}
+
+.service-description {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: var(--color-text-medium);
+  line-height: 1.7;
+  margin: 0 0 28px 0;
+}
+
+/* ============================================
+   SERVICE FEATURES
+   ============================================ */
+.service-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+}
+
+.service-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text-medium);
+  font-size: clamp(0.875rem, 1.5vw, 0.9375rem);
+  margin-bottom: 12px;
+  transition: all var(--transition-fast);
+}
+
+.service-features li:hover {
+  color: var(--color-primary-dark);
+  transform: translateX(4px);
+}
+
+.service-features li svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   SERVICE LINK
+   ============================================ */
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-white);
+  text-decoration: none;
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  font-size: clamp(0.875rem, 1.5vw, 0.9375rem);
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Specific button colors for each service */
+.service-link-loans {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.service-link-subsidy {
+  background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-dark) 100%);
+}
+
+.service-link-insurance {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+}
+
+.service-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  transition: left 0.5s ease;
+}
+
+.service-link:hover::before {
+  left: 100%;
+}
+
+.service-link:hover {
+  transform: translateX(4px);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+}
+
+.service-link-subsidy:hover {
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+}
+
+.service-link-insurance:hover {
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+}
+
+.link-arrow {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.service-link:hover .link-arrow {
+  transform: translateX(4px);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - BREAKPOINTS
+   ============================================ */
+
+/* Ultra-wide Screens (2000px+) */
+@media (min-width: 2000px) {
+  :root {
+    --section-padding-y: 160px;
+    --section-padding-x: 40px;
+    --card-padding: 60px;
+    --grid-gap: 48px;
+    --header-mb: 100px;
+  }
+
+  .services-container {
+    max-width: 1400px;
+  }
+
+  .services-title {
+    font-size: 3.5rem;
+  }
+
+  .services-subtitle {
+    font-size: 1.25rem;
+    max-width: 700px;
+  }
+
+  .icon-wrapper {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 35px;
+  }
+
+  .service-features li {
+    margin-bottom: 14px;
+  }
+}
+
+/* Large Desktop (1600px - 1999px) */
+@media (min-width: 1600px) and (max-width: 1999px) {
+  :root {
+    --section-padding-y: 140px;
+    --card-padding: 50px;
+    --grid-gap: 40px;
+  }
+
+  .services-container {
+    max-width: 1300px;
+  }
+
+  .icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 32px;
+  }
+}
+
+/* Desktop (1200px - 1599px) */
+@media (max-width: 1599px) and (min-width: 1200px) {
+  :root {
+    --section-padding-y: 120px;
+    --grid-gap: 36px;
+  }
+}
+
+/* Small Desktop & Tablet Landscape (992px - 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+  :root {
+    --section-padding-y: 100px;
+    --section-padding-x: 30px;
+    --card-padding: 36px;
+    --grid-gap: 30px;
+    --header-mb: 70px;
+  }
+
+  .gradient-orb-1,
+  .gradient-orb-2 {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+/* Tablet (768px - 991px) */
+@media (max-width: 991px) {
+  :root {
+    --section-padding-y: 80px;
+    --section-padding-x: 25px;
+    --card-padding: 32px;
+    --grid-gap: 28px;
+    --header-mb: 60px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gradient-orb-1,
+  .gradient-orb-2 {
+    width: 400px;
+    height: 400px;
+  }
+
+  .shape-1,
+  .shape-2 {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* Mobile & Small Tablet (577px - 767px) */
+@media (max-width: 767px) {
+  :root {
+    --section-padding-y: 70px;
+    --card-padding: 28px;
+    --grid-gap: 24px;
+    --header-mb: 50px;
+  }
+
+  .services-title {
+    font-size: 2.25rem;
+  }
+
+  .services-subtitle {
+    font-size: 1rem;
+  }
+
+  .icon-wrapper {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 24px;
+  }
+
+  .service-description {
+    margin-bottom: 24px;
+  }
+
+  .service-features {
+    margin-bottom: 28px;
+  }
+
+  .service-features li {
+    margin-bottom: 10px;
+  }
+}
+
+/* Large Mobile (480px - 576px) */
+@media (max-width: 576px) {
+  :root {
+    --section-padding-y: 60px;
+    --section-padding-x: 20px;
+    --card-padding: 24px;
+    --grid-gap: 20px;
+    --header-mb: 45px;
+  }
+
+  .header-tag {
+    font-size: 0.75rem;
+    padding: 6px 16px;
+    margin-bottom: 20px;
+  }
+
+  .services-title {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .services-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .icon-wrapper {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 22px;
+  }
+
+  .service-title {
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+  }
+
+  .service-description {
+    font-size: 0.9rem;
+    margin-bottom: 22px;
+  }
+
+  .service-features {
+    margin-bottom: 24px;
+  }
+
+  .service-features li {
+    font-size: 0.875rem;
+    margin-bottom: 10px;
+  }
+
+  .service-link {
+    padding: 12px 24px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Standard Mobile (360px - 479px) */
+@media (max-width: 479px) {
+  :root {
+    --section-padding-y: 50px;
+    --section-padding-x: 15px;
+    --card-padding: 22px;
+    --grid-gap: 18px;
+  }
+
+  .services-title {
+    font-size: 1.75rem;
+  }
+
+  .services-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .service-card {
+    border-radius: 20px;
+  }
+
+  .icon-wrapper {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+  }
+
+  .service-title {
+    font-size: 1.375rem;
+  }
+
+  .service-description {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .service-features li {
+    font-size: 0.8125rem;
+  }
+
+  .service-features li svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Small Mobile (up to 359px) */
+@media (max-width: 359px) {
+  :root {
+    --section-padding-y: 45px;
+    --section-padding-x: 12px;
+    --card-padding: 20px;
+    --grid-gap: 16px;
+  }
+
+  .header-tag {
+    font-size: 0.7rem;
+    padding: 5px 14px;
+  }
+
+  .services-title {
+    font-size: 1.625rem;
+  }
+
+  .services-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .icon-wrapper {
+    width: 52px;
+    height: 52px;
+  }
+
+  .service-title {
+    font-size: 1.25rem;
+  }
+
+  .service-description {
+    font-size: 0.8125rem;
+  }
+
+  .service-features li {
+    font-size: 0.8rem;
+    gap: 10px;
+  }
+
+  .service-link {
+    padding: 11px 20px;
+    font-size: 0.8125rem;
+  }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION
+   ============================================ */
+@media (max-height: 600px) and (orientation: landscape) {
+  :root {
+    --section-padding-y: 60px;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .background-elements {
+    display: none;
+  }
+
+  .services-overview {
+    padding: 40px 20px;
+    background: white;
+  }
+
+  .service-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .card-glow {
+    display: none;
+  }
+
+  .service-link {
+    border: 2px solid currentColor;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST MODE
+   ============================================ */
+@media (prefers-contrast: high) {
+  .service-card {
+    border-width: 2px;
+  }
+
+  .header-tag {
+    border-width: 2px;
+  }
+
+  .service-link {
+    border: 2px solid transparent;
+  }
+}
+
+/* ============================================
+   FOCUS STYLES (Accessibility)
+   ============================================ */
+.service-link:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.service-card:focus-within {
+  border-color: var(--color-primary);
+}

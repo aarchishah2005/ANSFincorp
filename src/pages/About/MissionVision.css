@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --vision-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --mission-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --dark-text: #2d3748;
+  --gray-text: #718096;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mission-vision-section {
+  width: 100%;
+  padding: 24px 24px;
+  background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating Background Shapes */
+.bg-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.03;
+  animation: floatShape 20s ease-in-out infinite;
+}
+
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  top: -100px;
+  right: -100px;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  bottom: -50px;
+  left: -50px;
+  animation-delay: 7s;
+}
+
+.shape-3 {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  top: 50%;
+  left: 50%;
+  animation-delay: 14s;
+}
+
+@keyframes floatShape {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+.mv-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Vision & Mission Cards */
+.vm-cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  /* margin-bottom: 5rem; */
+}
+
+.vm-card {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInUp 0.8s ease-out backwards;
+}
+
+.vision-card {
+  animation-delay: 0.1s;
+}
+
+.mission-card {
+  animation-delay: 0.2s;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vm-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+.vm-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.vm-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+.vm-card:hover .vm-icon-wrapper {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.vision-icon {
+  background: var(--vision-gradient);
+  box-shadow: 0 8px 20px rgba(245, 87, 108, 0.3);
+}
+
+.mission-icon {
+  background: var(--mission-gradient);
+  box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
+}
+
+.vm-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.vm-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vm-description {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--gray-text);
+  position: relative;
+  z-index: 2;
+}
+
+.vm-decoration {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 24px 0 24px 0;
+  opacity: 0.08;
+  transition: all 0.5s ease;
+}
+
+.vision-decoration {
+  background: var(--vision-gradient);
+}
+
+.mission-decoration {
+  background: var(--mission-gradient);
+}
+
+.vm-card:hover .vm-decoration {
+  width: 200px;
+  height: 200px;
+  opacity: 0.12;
+}
+
+/* Why Choose Us Section */
+.why-choose-section {
+  margin-top: 4rem;
+  animation: fadeIn 1s ease-out 0.4s backwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.why-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.why-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.why-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  color: var(--gray-text);
+  font-weight: 500;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.why-card {
+  background: var(--white);
+  padding: 2rem 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  animation: popIn 0.6s ease-out both;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--card-color, #667eea);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.why-card:hover::before,
+.why-card.active::before {
+  transform: scaleX(1);
+}
+
+.why-card:hover,
+.why-card.active {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.14);
+}
+
+.why-card-inner {
+  text-align: center;
+}
+
+.why-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.why-card:hover .why-icon,
+.why-card.active .why-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.why-card-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+.why-card-accent {
+  width: 40px;
+  height: 3px;
+  background: var(--card-color, #667eea);
+  margin: 0 auto;
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: all 0.4s ease;
+}
+
+.why-card:hover .why-card-accent,
+.why-card.active .why-card-accent {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mission-vision-section {
+    padding: 3rem 1rem;
+  }
+
+  .vm-cards-wrapper {
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .vm-card {
+    padding: 2rem;
+  }
+
+  .vm-title {
+    font-size: 1.75rem;
+  }
+
+  .why-title {
+    font-size: 2.5rem;
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .why-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .why-card-title {
+    font-size: 0.9rem;
+  }
+
+  .why-icon {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .vm-cards-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .vm-card {
+    padding: 1.5rem;
+  }
+
+  .vm-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .vm-title {
+    font-size: 1.5rem;
+  }
+
+  .vm-description {
+    font-size: 0.95rem;
+  }
+
+  .why-title {
+    font-size: 2rem;
+  }
+
+  .why-subtitle {
+    font-size: 1rem;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
