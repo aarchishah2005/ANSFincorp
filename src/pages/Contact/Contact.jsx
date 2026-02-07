@@ -115,11 +115,11 @@ const Contact = () => {
             </div>
             <h3>Visit Our Office</h3>
             <p>
-              D-422, 4th Floor, ITC Building,
+              U-7, Someshwar Square, Opp.
               <br />
-              Near Majura Gate, Surat,
+              Aagam Heritage, Nr. Someshwar Banglaw, University Road,
               <br />
-              Gujarat – 395001
+              Surat, Gujarat – 395001
             </p>
           </div>
 
