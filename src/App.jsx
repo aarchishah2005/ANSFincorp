@@ -6,6 +6,7 @@ import About from "./pages/About/About";
 import Services from "./pages/Services/Services";
 import Contact from "./pages/Contact/Contact";
 import TeamPage from "./pages/About/TeamPage";
+import TestimonialsPage from "./pages/Testimonials/TestimonialsPage";
 
 import ScrollToTop from "./components/ScrollToTop"; // 👈 ADD THIS
 
@@ -21,7 +22,7 @@ const AppRoutes = () => {
           <Route path="/ourteam" element={<TeamPage />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
-
+          <Route path="/testimonials" element={<TestimonialsPage />} /> 
         </Route>
       </Routes>
     </BrowserRouter>

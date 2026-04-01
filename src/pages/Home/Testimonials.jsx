@@ -1,66 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Testimonials.css';
+import { loadReviews } from '../../data/reviewsData';
 
-const testimonialData = [
-  {
-    text: "ANS Fincorp made the entire loan process smooth and stress-free. From documentation to final approval, everything was handled professionally and transparently. We truly felt supported at every step.",
-    name: "Aarchi Shah"
-  },
-  {
-    text: "What we appreciated most about ANS Fincorp was their clear guidance and honest advice. They explained all options patiently and helped us choose the best solution for our financial needs.",
-    name: "Vini Patel"
-  },
-  {
-    text: "Thanks to ANS Fincorp, our loan was approved faster than expected. Their team is responsive, knowledgeable, and always ready to help. Highly reliable service.",
-    name: "Swayam Shah"
-  },
-  {
-    text: "ANS Fincorp stands out for their personal attention and commitment. They didn’t treat us like just another client but genuinely worked in our best interest.",
-    name: "Nehal Shah"
-  }
-];
+function getInitials(name) {
+  return name
+    .trim()
+    .split(' ')
+    .map((w) => w[0]?.toUpperCase())
+    .filter(Boolean)
+    .slice(0, 2)
+    .join('');
+}
 
 const Testimonials = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTransitioning(true);
-      setTimeout(() => {
-        setActiveIndex((prevIndex) => 
-          prevIndex === testimonialData.length - 1 ? 0 : prevIndex + 1
-        );
-        setTransitioning(false);
-      }, 600); // Match animation duration
-    }, 4000); // Auto-change every 4 seconds
-
-    return () => clearInterval(interval);
-  }, []);
+  // Load from localStorage (same source as Testimonials page)
+  // Show only the latest 4 reviews on the home page
+  const allReviews = loadReviews();
+  const reviews = allReviews.slice(0, 4);
 
   return (
     <div className="testimonial-section">
-      <h2 className="testimonial-title">Testimonials</h2>
-      
-      <div className="carousel-container">
-        <div className="carousel-inner">
-          {testimonialData.map((testimonial, index) => (
-            <div
-              key={index}
-              className={`carousel-item ${
-                index === activeIndex ? (transitioning ? "exiting" : "active") : ""
-              }`}
-              style={{ position: index === activeIndex ? 'relative' : 'absolute' }}
-            >
-              <blockquote>
-                <p className="testimonial-text">{testimonial.text}</p>
-                <footer className="testimonial-footer">
-                  <div className="testimonial-name">{testimonial.name}</div>
-                </footer>
-              </blockquote>
+      <div className="testimonial-header">
+        <span className="testimonial-badge">Client Reviews</span>
+        <h2 className="testimonial-title">What Our Clients Say</h2>
+        <p className="testimonial-subtitle">
+          Real experiences from families and businesses across Surat who trust ANS Fincorp.
+        </p>
+      </div>
+
+      <div className="testimonial-grid">
+        {reviews.map((t) => (
+          <div key={t.id} className="testimonial-card">
+            <div className="t-stars">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <span key={n} className={`t-star ${n <= t.rating ? 'filled' : ''}`}>★</span>
+              ))}
             </div>
-          ))}
-        </div>
+            <p className="t-text">"{t.feedback}"</p>
+            <div className="t-author">
+              <div className="t-avatar">{getInitials(t.name)}</div>
+              <div>
+                <div className="t-name">{t.name}</div>
+                <div className="t-company">{t.company}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="testimonial-cta">
+        <Link to="/testimonials" className="testimonial-cta-btn">
+          View All Reviews &amp; Share Yours
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </Link>
       </div>
     </div>
   );
