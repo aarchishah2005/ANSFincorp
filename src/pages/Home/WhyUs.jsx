@@ -96,10 +96,6 @@ const WhyUs = () => {
             Your Success is{" "}
             <span className="title-accent"> Our Priority</span>
           </h2>
-          <p className="why-us-subtitle">
-            Trusted by thousands of clients for reliable financial solutions, 
-            transparent processes, and expert guidance every step of the way.
-          </p>
         </div>
 
         {/* Features Grid */}

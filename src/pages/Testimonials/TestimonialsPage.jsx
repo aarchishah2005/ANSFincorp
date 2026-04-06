@@ -177,7 +177,7 @@ const TestimonialsPage = () => {
         </h1>
         <p className="tp-subhead">
           Real experiences from real clients. See why families and businesses
-          across Surat trust ANS Fincorp for their financial journey.
+          across Gujarat trust ANS Fincorp for their financial journey.
         </p>
 
         <div className="tp-stats">

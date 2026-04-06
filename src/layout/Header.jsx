@@ -61,13 +61,13 @@ const Header = () => {
             Our Team
           </NavLink>
           <NavLink to="/services" onClick={closeMenu}>
-            Services
-          </NavLink>
-          <NavLink to="/contact" onClick={closeMenu}>
-            Contact
+            Expertise
           </NavLink>
           <NavLink to="/testimonials" onClick={closeMenu}>
             Testimonials
+          </NavLink>
+          <NavLink to="/contact" onClick={closeMenu}>
+            Contact
           </NavLink>
 
           {/* Mobile CTA inside nav */}

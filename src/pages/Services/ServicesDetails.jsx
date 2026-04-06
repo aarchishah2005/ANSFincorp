@@ -125,7 +125,8 @@ const ServicesDetails = () => {
           <span className="title-gradient">Our Expertise</span>
         </h1>
         <p className="services-subtitle">
-          Professional financial solutions and industry-specific consultancy services
+          Delivering comprehensive financial consultancy solutions for loans, government subsidies, 
+          and insurance to empower your business growth and success.
         </p>
       </div>
 

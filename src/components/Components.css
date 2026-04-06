@@ -1,0 +1,254 @@
+/* ═══════════════════════════════════
+   SHARED COMPONENTS — ANS Fincorp
+   ═══════════════════════════════════ */
+
+/* ── PAGE HEADER (reusable banner) ─── */
+.page-header {
+  background: linear-gradient(160deg, var(--blue-50) 0%, var(--white) 65%);
+  padding: 8rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--gray-100);
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(187,222,251,0.45) 0%, transparent 70%);
+  pointer-events: none;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -40px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214,236,255,0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+.page-header__inner {
+  position: relative;
+  z-index: 1;
+}
+.page-header__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue-600);
+  margin-bottom: 1rem;
+}
+.page-header__eyebrow::before {
+  content: ''; width: 22px; height: 2px;
+  background: var(--blue-600); border-radius: 2px;
+}
+.page-header__title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.page-header__title em { color: var(--blue-600); font-style: italic; }
+.page-header__desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.8;
+}
+.page-header__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 1.5rem;
+}
+.page-header__breadcrumb a { color: var(--blue-600); }
+.page-header__breadcrumb a:hover { text-decoration: underline; }
+.page-header__breadcrumb-sep { color: var(--gray-300); }
+
+
+/* ── SECTION TITLE COMPONENT ─────────── */
+.section-title-block { margin-bottom: 3rem; }
+.section-title-block.center { text-align: center; }
+.section-title-block.center .section-desc {
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-title-block__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue-600);
+  margin-bottom: 0.85rem;
+}
+.section-title-block.center .section-title-block__eyebrow {
+  justify-content: center;
+  display: flex;
+}
+.section-title-block__eyebrow::before {
+  content: '';
+  width: 26px; height: 2px;
+  background: var(--blue-600);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.section-title-block__title {
+  font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.section-title-block__title em { font-style: italic; color: var(--blue-600); }
+.section-title-block__desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 580px;
+}
+
+
+/* ── SCROLL TO TOP BUTTON ─────────────── */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px; height: 44px;
+  background: var(--blue-600);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(21,101,192,0.35);
+  cursor: pointer;
+  z-index: 100;
+  transition: all var(--t-base) var(--ease);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+.scroll-to-top--visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.scroll-to-top:hover {
+  background: var(--blue-700);
+  box-shadow: 0 10px 32px rgba(21,101,192,0.45);
+  transform: translateY(-2px);
+}
+.scroll-to-top svg { width: 18px; height: 18px; }
+
+
+/* ── CONTACT FORM (shared component) ─── */
+.contact-form-component {
+  background: var(--white);
+  border: 1.5px solid var(--gray-100);
+  border-radius: var(--r-xl);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-form-component .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.contact-form-component .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-form-component .form-label {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.contact-form-component .form-input,
+.contact-form-component .form-textarea {
+  padding: 0.78rem 1rem;
+  border: 1.5px solid var(--gray-100);
+  border-radius: var(--r-md);
+  background: var(--gray-50);
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  width: 100%;
+  transition: all var(--t-base) var(--ease);
+}
+.contact-form-component .form-input:focus,
+.contact-form-component .form-textarea:focus {
+  background: var(--white);
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 3px rgba(21,101,192,0.1);
+}
+.contact-form-component .form-textarea { resize: vertical; min-height: 120px; }
+
+.contact-form-component .form-submit {
+  width: 100%;
+  padding: 0.95rem;
+  background: var(--blue-600);
+  color: var(--white);
+  border-radius: var(--r-md);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all var(--t-base) var(--ease);
+}
+.contact-form-component .form-submit:hover {
+  background: var(--blue-700);
+  box-shadow: var(--shadow-blue);
+  transform: translateY(-2px);
+}
+
+
+/* ── CARD COMPONENT ─────────────────── */
+.ans-card {
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--r-lg);
+  padding: 2rem;
+  transition: all var(--t-base) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.ans-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue-200);
+  transform: translateY(-4px);
+}
+.ans-card--blue {
+  background: var(--blue-700);
+  border-color: var(--blue-600);
+  color: var(--white);
+}
+.ans-card--blue h3, .ans-card--blue h4 { color: var(--white); }
+.ans-card--blue p { color: rgba(255,255,255,0.7); }
+
+.ans-card__ribbon {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grad-blue);
+  opacity: 0;
+  transition: opacity var(--t-base);
+}
+.ans-card:hover .ans-card__ribbon { opacity: 1; }
+
+
+/* ── RESPONSIVE ─────────────────────── */
+@media (max-width: 640px) {
+  .contact-form-component .form-row { grid-template-columns: 1fr; }
+  .scroll-to-top { bottom: 1.25rem; right: 1.25rem; }
+}

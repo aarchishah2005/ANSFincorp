@@ -36,9 +36,8 @@ const ServicesOverview = () => {
         <div className="services-grid">
           {/* Loans Card */}
           <div
-            className={`service-card ${
-              hoveredCard === "loans" ? "card-hovered" : ""
-            }`}
+            className={`service-card ${hoveredCard === "loans" ? "card-hovered" : ""
+              }`}
             onMouseEnter={() => setHoveredCard("loans")}
             onMouseLeave={() => setHoveredCard(null)}
           >
@@ -114,32 +113,13 @@ const ServicesOverview = () => {
                   Working Capital
                 </li>
               </ul>
-
-              <Link to="/services" className="service-link service-link-loans">
-                <span>Explore Loans</span>
-                <svg
-                  className="link-arrow"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5 12H19M19 12L12 5M19 12L12 19"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
             </div>
           </div>
 
           {/* Subsidy Card */}
           <div
-            className={`service-card ${
-              hoveredCard === "subsidy" ? "card-hovered" : ""
-            }`}
+            className={`service-card ${hoveredCard === "subsidy" ? "card-hovered" : ""
+              }`}
             onMouseEnter={() => setHoveredCard("subsidy")}
             onMouseLeave={() => setHoveredCard(null)}
           >
@@ -165,7 +145,7 @@ const ServicesOverview = () => {
 
               <h3 className="service-title">Subsidy</h3>
               <p className="service-description">
-                Expert assistance in securing government subsidies and grants. 
+                Expert assistance in securing government subsidies and grants.
                 Maximize your benefits with our comprehensive subsidy consulting services.
               </p>
 
@@ -201,32 +181,13 @@ const ServicesOverview = () => {
                   Benefit Optimization
                 </li>
               </ul>
-
-              <Link to="/services" className="service-link service-link-subsidy">
-                <span>Explore Subsidy</span>
-                <svg
-                  className="link-arrow"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5 12H19M19 12L12 5M19 12L12 19"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
             </div>
           </div>
 
           {/* Insurance Solutions Card */}
           <div
-            className={`service-card ${
-              hoveredCard === "insurance" ? "card-hovered" : ""
-            }`}
+            className={`service-card ${hoveredCard === "insurance" ? "card-hovered" : ""
+              }`}
             onMouseEnter={() => setHoveredCard("insurance")}
             onMouseLeave={() => setHoveredCard(null)}
           >
@@ -289,26 +250,36 @@ const ServicesOverview = () => {
                   Asset Security
                 </li>
               </ul>
-
-              <Link to="/services" className="service-link service-link-insurance">
-                <span>Explore Insurance</span>
-                <svg
-                  className="link-arrow"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5 12H19M19 12L12 5M19 12L12 19"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
             </div>
           </div>
+
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            paddingTop: "2rem",
+          }}
+        >
+          <Link className="service-link service-link-loans">
+            <span>Let's Connect</span>
+            <svg
+              className="link-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 12H19M19 12L12 5M19 12L12 19"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
