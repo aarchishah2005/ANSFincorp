@@ -1,152 +1,150 @@
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
 import "./Hero.css";
 
+import slide1 from "../../assets/new_hero_1.png";
+import slide2 from "../../assets/new_hero_2.png";
+import slide4 from "../../assets/new_hero_4.png";
+
+const slides = [
+  {
+    id: 1,
+    type: "centered",
+    image: slide1,
+    badge: "Connection & Growth",
+    title: "Building Your Financial Bridge",
+    subtitle: "A steady path to financial success.",
+    description: "We provide clear, strategic guidance to connect your present goals with a secure financial future.",
+  },
+  {
+    id: 2,
+    type: "split",
+    image: slide2,
+    badge: "Expert Consultation",
+    title: "Your Trusted Advisors",
+    subtitle: "Personalized strategies for your growth.",
+    description: "Our dedicated consultants work closely with you to understand your needs and deliver tailored financial solutions.",
+  },
+  {
+    id: 4,
+    type: "image-only",
+    image: slide4,
+  }
+];
+
 const Hero = () => {
-  const canvasRef = useRef(null);
-
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const heroRef = useRef(null);
+  // Slider Autoplay
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = canvas.offsetHeight;
-
-    // Floating financial particles
-    const particles = [];
-    const particleCount = 40;
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-        this.opacity = Math.random() * 0.5 + 0.2;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if (this.x > canvas.width) this.x = 0;
-        if (this.x < 0) this.x = canvas.width;
-        if (this.y > canvas.height) this.y = 0;
-        if (this.y < 0) this.y = canvas.height;
-      }
-
-      draw() {
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((particle) => {
-        particle.update();
-        particle.draw();
-      });
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 8000); // 8 seconds per slide
+    return () => clearInterval(timer);
   }, []);
 
-  return (
-    <section className="hero">
-      <canvas ref={canvasRef} className="hero-canvas"></canvas>
-      
-      {/* Decorative geometric elements */}
-      <div className="hero-decoration">
-        <div className="deco-circle deco-circle-1"></div>
-        <div className="deco-circle deco-circle-2"></div>
-        <div className="deco-square"></div>
+  // --- SLIDE RENDERERS ---
+
+  const renderFloatingSlide = (slide) => (
+    <div className="layout-floating">
+      <div className="slide-bg" style={{ backgroundImage: `url(${slide.image})` }}>
+        <div className="overlay-gradient-left"></div>
       </div>
-
-      <div className="hero-content">
-        <div className="hero-badge">
-          {/* <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="badge-icon">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/>
-          </svg> */}
-          <span>Trusted by 50+ Happy Clients</span>
+      <div className="slide-content">
+        <div className="text-col">
+          {slide.badge && <div className="hero-badge">{slide.badge}</div>}
+          <h1 className="hero-title">
+            {slide.title.split(' ').map((word, i, arr) =>
+              i === arr.length - 1 ? <span key={i} className="text-gradient">{word}</span> : word + ' '
+            )}
+          </h1>
+          {slide.subtitle && <h2 className="hero-subtitle">{slide.subtitle}</h2>}
+          {slide.description && <p className="hero-description">{slide.description}</p>}
+          {(slide.subtitle || slide.description) && (
+            <div className="hero-cta-group">
+              <Link to="/contact" className="btn-glow">Let's Connect</Link>
+            </div>
+          )}
         </div>
 
-        <h1 className="hero-title">
-          Your Trusted Bridge to Better Finance
-        </h1>
 
-        <div className="hero-services">
-          <div className="service-tag">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span>Loans</span>
+      </div>
+    </div>
+  );
+
+  const renderCenteredSlide = (slide) => (
+    <div className="layout-centered">
+      <div className="slide-bg" style={{ backgroundImage: `url(${slide.image})` }}>
+        <div className="overlay-dark-blue"></div>
+      </div>
+      <div className="slide-content centered-content">
+        {slide.badge && <div className="hero-badge badge-white">{slide.badge}</div>}
+        <h1 className="hero-title text-white">{slide.title}</h1>
+        {slide.subtitle && <h2 className="hero-subtitle text-light-blue">{slide.subtitle}</h2>}
+        {slide.description && <p className="hero-description text-gray-light">{slide.description}</p>}
+        {(slide.subtitle || slide.description) && (
+          <div className="hero-cta-group justify-center">
+            <Link to="/contact" className="btn-glow">Discover More</Link>
+            <Link to="/services" className="btn-outline-glass">Our Services</Link>
           </div>
-          <div className="service-tag">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
-              <path d="M9 12L11 14L15 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span>Subsidy</span>
-          </div>
-          <div className="service-tag">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2"/>
-              <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            <span>Insurance</span>
+        )}
+      </div>
+    </div>
+  );
+
+  const renderImageOnlySlide = (slide) => (
+    <div className="layout-image-only">
+      <img src={slide.image} alt="Full view" className="image-only-full" />
+    </div>
+  );
+
+  const renderSplitSlide = (slide) => (
+    <div className="layout-split">
+      <div className="split-left">
+        <div className="split-content-inner">
+          <div className="hero-badge">{slide.badge}</div>
+          <h1 className="hero-title">{slide.title}</h1>
+          <h2 className="hero-subtitle">{slide.subtitle}</h2>
+          <p className="hero-description">{slide.description}</p>
+          <div className="hero-cta-group">
+            <Link to="/contact" className="btn-glow">Get in Touch</Link>
           </div>
         </div>
+      </div>
+      <div className="split-right">
+        <div className="split-image" style={{ backgroundImage: `url(${slide.image})` }}></div>
+      </div>
+    </div>
+  );
 
-        <p className="hero-description">
-          Supporting individuals and businesses with reliable financial solutions 
-          tailored to your unique needs and aspirations.
-        </p>
+  return (
+    <section className="creative-hero-slider" ref={heroRef}>
+      {slides.map((slide, index) => {
+        let slideContent = null;
+        if (slide.type === "floating") slideContent = renderFloatingSlide(slide);
+        if (slide.type === "centered") slideContent = renderCenteredSlide(slide);
+        if (slide.type === "split") slideContent = renderSplitSlide(slide);
+        if (slide.type === "image-only") slideContent = renderImageOnlySlide(slide);
 
-        <div className="hero-buttons">
-          <Link to="/contact" className="btn btn-primary">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span>Talk to Expert</span>
-          </Link>
-        </div>
+        return (
+          <div
+            key={slide.id}
+            className={`hero-slide-wrapper ${index === currentSlide ? 'active' : ''} ${slide.type === 'centered' ? 'has-dark-bg' : ''}`}
+          >
+            {slideContent}
+          </div>
+        );
+      })}
 
-        <div className="hero-stats">
-          <div className="stat-item">
-            <div className="stat-number">₹50+</div>
-            <div className="stat-label">Happy Clients</div>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="stat-item">
-            <div className="stat-number">₹1500Cr+</div>
-            <div className="stat-label">Loans Processed</div>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="stat-item">
-            <div className="stat-number">98%</div>
-            <div className="stat-label">Success Rate</div>
-          </div>
-        </div>
+      <div className="hero-slider-controls">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            className={`slider-dot ${index === currentSlide ? 'active' : ''}`}
+            onClick={() => setCurrentSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          ></button>
+        ))}
       </div>
     </section>
   );
