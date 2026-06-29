@@ -71,15 +71,15 @@ const Header = () => {
           </NavLink>
 
           {/* Mobile CTA inside nav */}
-          <Link to="/contact" className="header-cta mobile-cta" onClick={closeMenu}>
+          {/* <Link to="/contact" className="header-cta mobile-cta" onClick={closeMenu}>
             Apply Now
-          </Link>
+          </Link> */}
         </nav>
 
         {/* Desktop CTA */}
-        <Link to="/contact" className="header-cta desktop-cta">
-          Apply Now
-        </Link>
+          {/* <Link to="/contact" className="header-cta desktop-cta">
+            Apply Now
+          </Link> */}
 
         {/* Mobile Menu Toggle */}
         <button

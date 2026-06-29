@@ -263,7 +263,7 @@ const ServicesOverview = () => {
             paddingTop: "2rem",
           }}
         >
-          <Link className="service-link service-link-loans">
+          <Link to="/contact" className="service-link service-link-loans">
             <span>Let's Connect</span>
             <svg
               className="link-arrow"

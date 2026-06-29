@@ -84,7 +84,7 @@ const Hero = () => {
         {slide.description && <p className="hero-description text-gray-light">{slide.description}</p>}
         {(slide.subtitle || slide.description) && (
           <div className="hero-cta-group justify-center">
-            <Link to="/contact" className="btn-glow">Discover More</Link>
+            <Link to="/contact" className="btn-glow">Let's Connect</Link>
             <Link to="/services" className="btn-outline-glass">Our Services</Link>
           </div>
         )}
