@@ -1,45 +1,52 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
+
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
-  // Allow only POST requests
-  if (req.method !== "POST") {
-    return res.status(405).json({
-      success: false,
-      message: "Method Not Allowed",
-    });
-  }
+    // Allow only POST requests
+    if (req.method !== "POST") {
+        return res.status(405).json({
+            success: false,
+            message: "Method Not Allowed",
+        });
+    }
 
-  const { name, email, phone, subject, message } = req.body;
+    const { name, email, phone, subject, message } = req.body;
 
-  // Basic Validation
-  if (!name || !email || !phone || !subject || !message) {
-    return res.status(400).json({
-      success: false,
-      message: "All fields are required.",
-    });
-  }
+    // Basic Validation
+    if (!name || !email || !phone || !subject || !message) {
+        return res.status(400).json({
+            success: false,
+            message: "All fields are required.",
+        });
+    }
 
-  try {
-    // Gmail Transporter
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+    try {
+        // Gmail Transporter
+        console.log("EMAIL_USER:", process.env.EMAIL_USER);
+        console.log(
+            "EMAIL_PASS:",
+            process.env.EMAIL_PASS ? "Loaded" : "Missing"
+        );
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
 
-    // Email to You
-    await transporter.sendMail({
-      from: `"ANS Fincorp Website" <${process.env.EMAIL_USER}>`,
-      to: [
-        "ansfincorp@gmail.com",
-        "aarchi.shah2005@gmail.com",
-      ],
-      replyTo: email,
-      subject: `New Contact Form - ${subject}`,
-      html: `
+        // Email to You
+        await transporter.sendMail({
+            from: `"ANS Fincorp Website" <${process.env.EMAIL_USER}>`,
+            to: [
+                "ansfincorp@gmail.com",
+                "aarchi.shah2005@gmail.com",
+            ],
+            replyTo: email,
+            subject: `New Contact Form - ${subject}`,
+            html: `
         <div style="font-family:Arial,sans-serif;padding:20px">
           <h2 style="color:#0B5ED7;">New Contact Form Submission</h2>
 
@@ -78,14 +85,14 @@ export default async function handler(req, res) {
           </p>
         </div>
       `,
-    });
+        });
 
-    // Auto Reply to Customer
-    await transporter.sendMail({
-      from: `"ANS Fincorp" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "Thank you for contacting ANS Fincorp",
-      html: `
+        // Auto Reply to Customer
+        await transporter.sendMail({
+            from: `"ANS Fincorp" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject: "Thank you for contacting ANS Fincorp",
+            html: `
         <div style="font-family:Arial,sans-serif;padding:20px">
           <h2>Thank You, ${name}! 👋</h2>
 
@@ -106,19 +113,22 @@ export default async function handler(req, res) {
           </p>
         </div>
       `,
-    });
+        });
 
-    return res.status(200).json({
-      success: true,
-      message: "Email sent successfully.",
-    });
+        return res.status(200).json({
+            success: true,
+            message: "Email sent successfully.",
+        });
 
-  } catch (error) {
-    console.error(error);
+    } catch (error) {
+        console.error("========== CONTACT API ERROR ==========");
+        console.error(error);
+        console.error("Message:", error.message);
+        console.error("Stack:", error.stack);
 
-    return res.status(500).json({
-      success: false,
-      message: "Failed to send email.",
-    });
-  }
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
 }
