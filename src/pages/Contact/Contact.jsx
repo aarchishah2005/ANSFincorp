@@ -21,39 +21,41 @@ const Contact = () => {
     setIsSubmitting(true);
     setStatus({ type: "", message: "" });
 
-    const web3formsKey = "YOUR_WEB3FORMS_ACCESS_KEY"; // Replace with your actual key
-
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: web3formsKey,
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          subject: formData.subject,
-          message: formData.message,
-          to: "ansfincorp@gmail.com",
-          from_name: "ANS Fincorp Contact Form",
-        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
 
       const result = await response.json();
 
-      if (result.success) {
+      if (response.ok && result.success) {
         setStatus({
           type: "success",
-          message: "Thank you! Your message has been sent successfully. We'll get back to you soon.",
+          message:
+            "Thank you! Your message has been sent successfully. We'll get back to you soon.",
         });
-        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
       } else {
-        throw new Error("Submission failed");
+        throw new Error(result.message || "Failed to send message.");
       }
-    } catch {
+    } catch (error) {
+      console.error("Contact Form Error:", error);
+
       setStatus({
         type: "error",
-        message: "Oops! Something went wrong. Please try again or email us directly.",
+        message:
+          "Oops! Something went wrong. Please try again after some time.",
       });
     } finally {
       setIsSubmitting(false);
